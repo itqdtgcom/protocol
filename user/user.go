@@ -42,7 +42,7 @@ func (x *UpdateUserInfoReq) Check() error {
 }
 
 func (x *SetGlobalRecvMessageOptReq) Check() error {
-	if x.GlobalRecvMsgOpt > 2 || x.GlobalRecvMsgOpt < 0 {
+	if x.GlobalRecvMsgOpt > 3 || x.GlobalRecvMsgOpt < 0 {
 		return errors.New("GlobalRecvMsgOpt is invalid")
 	}
 	if x.UserID == "" {
@@ -67,7 +67,7 @@ func (x *SetRecvMsgOptReq) Check() error {
 	if x.ConversationID == "" {
 		return errors.New("ConversationID is empty")
 	}
-	if x.RecvMsgOpt < 0 || x.RecvMsgOpt > 2 {
+	if x.RecvMsgOpt < 0 || x.RecvMsgOpt > 3 {
 		return errors.New("RecvMsgOpt is invalid")
 	}
 	if x.NotificationType < 1 || x.NotificationType > 3 {

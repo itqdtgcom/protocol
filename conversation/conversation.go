@@ -24,7 +24,7 @@ func (x *Conversation) Check() error {
 	if x.ConversationType < 1 || x.ConversationType > 4 {
 		return errors.New("ConversationType is invalid")
 	}
-	if x.RecvMsgOpt < 0 || x.RecvMsgOpt > 2 {
+	if x.RecvMsgOpt < 0 || x.RecvMsgOpt > 3 {
 		return errors.New("RecvMsgOpt is invalid")
 	}
 	return nil

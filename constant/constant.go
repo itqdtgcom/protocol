@@ -151,6 +151,7 @@ const (
 	ReceiveMessage          = 0
 	NotReceiveMessage       = 1
 	ReceiveNotNotifyMessage = 2
+	ReceiveNotNotifyAndFold = 3 // 接收消息但不推送且折叠聊天
 
 	// OptionsKey.
 	IsHistory                  = "history"
