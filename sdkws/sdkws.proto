@@ -602,3 +602,21 @@ message ConversationDeleteTips {
   string userID = 1;
   repeated string conversationIDs = 2;
 }
+
+// RelationProfile stores private owner-to-target metadata for a non-friend
+// relation such as colleagues in the same enterprise space.
+message RelationProfile {
+  string ownerUserID = 1;
+  string targetUserID = 2;
+  string spaceID = 3;
+  string relationType = 4;
+  string remark = 5;
+  string ex = 6;
+  int64 createTime = 7;
+  int64 updateTime = 8;
+}
+
+message RelationProfileChangedTips {
+  RelationProfile profile = 1;
+  bool deleted = 2;
+}

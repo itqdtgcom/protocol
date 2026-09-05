@@ -43,6 +43,7 @@ const (
 	BlackDeletedNotification              = 1208 // remove_black
 	FriendInfoUpdatedNotification         = 1209
 	FriendsInfoUpdateNotification         = 1210 //update friend info
+	RelationProfileUpdatedNotification    = 1211 // owner-private colleague profile changed
 
 	ConversationChangeNotification = 1300 // change conversation opt
 

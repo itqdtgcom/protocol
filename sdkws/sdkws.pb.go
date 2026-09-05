@@ -5597,6 +5597,160 @@ func (x *ConversationDeleteTips) GetConversationIDs() []string {
 	return nil
 }
 
+// RelationProfile stores private owner-to-target metadata for a non-friend
+// relation such as colleagues in the same enterprise space.
+type RelationProfile struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	OwnerUserID   string                 `protobuf:"bytes,1,opt,name=ownerUserID,proto3" json:"ownerUserID"`
+	TargetUserID  string                 `protobuf:"bytes,2,opt,name=targetUserID,proto3" json:"targetUserID"`
+	SpaceID       string                 `protobuf:"bytes,3,opt,name=spaceID,proto3" json:"spaceID"`
+	RelationType  string                 `protobuf:"bytes,4,opt,name=relationType,proto3" json:"relationType"`
+	Remark        string                 `protobuf:"bytes,5,opt,name=remark,proto3" json:"remark"`
+	Ex            string                 `protobuf:"bytes,6,opt,name=ex,proto3" json:"ex"`
+	CreateTime    int64                  `protobuf:"varint,7,opt,name=createTime,proto3" json:"createTime"`
+	UpdateTime    int64                  `protobuf:"varint,8,opt,name=updateTime,proto3" json:"updateTime"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RelationProfile) Reset() {
+	*x = RelationProfile{}
+	mi := &file_sdkws_sdkws_proto_msgTypes[75]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RelationProfile) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RelationProfile) ProtoMessage() {}
+
+func (x *RelationProfile) ProtoReflect() protoreflect.Message {
+	mi := &file_sdkws_sdkws_proto_msgTypes[75]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RelationProfile.ProtoReflect.Descriptor instead.
+func (*RelationProfile) Descriptor() ([]byte, []int) {
+	return file_sdkws_sdkws_proto_rawDescGZIP(), []int{75}
+}
+
+func (x *RelationProfile) GetOwnerUserID() string {
+	if x != nil {
+		return x.OwnerUserID
+	}
+	return ""
+}
+
+func (x *RelationProfile) GetTargetUserID() string {
+	if x != nil {
+		return x.TargetUserID
+	}
+	return ""
+}
+
+func (x *RelationProfile) GetSpaceID() string {
+	if x != nil {
+		return x.SpaceID
+	}
+	return ""
+}
+
+func (x *RelationProfile) GetRelationType() string {
+	if x != nil {
+		return x.RelationType
+	}
+	return ""
+}
+
+func (x *RelationProfile) GetRemark() string {
+	if x != nil {
+		return x.Remark
+	}
+	return ""
+}
+
+func (x *RelationProfile) GetEx() string {
+	if x != nil {
+		return x.Ex
+	}
+	return ""
+}
+
+func (x *RelationProfile) GetCreateTime() int64 {
+	if x != nil {
+		return x.CreateTime
+	}
+	return 0
+}
+
+func (x *RelationProfile) GetUpdateTime() int64 {
+	if x != nil {
+		return x.UpdateTime
+	}
+	return 0
+}
+
+type RelationProfileChangedTips struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Profile       *RelationProfile       `protobuf:"bytes,1,opt,name=profile,proto3" json:"profile"`
+	Deleted       bool                   `protobuf:"varint,2,opt,name=deleted,proto3" json:"deleted"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RelationProfileChangedTips) Reset() {
+	*x = RelationProfileChangedTips{}
+	mi := &file_sdkws_sdkws_proto_msgTypes[76]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RelationProfileChangedTips) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RelationProfileChangedTips) ProtoMessage() {}
+
+func (x *RelationProfileChangedTips) ProtoReflect() protoreflect.Message {
+	mi := &file_sdkws_sdkws_proto_msgTypes[76]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RelationProfileChangedTips.ProtoReflect.Descriptor instead.
+func (*RelationProfileChangedTips) Descriptor() ([]byte, []int) {
+	return file_sdkws_sdkws_proto_rawDescGZIP(), []int{76}
+}
+
+func (x *RelationProfileChangedTips) GetProfile() *RelationProfile {
+	if x != nil {
+		return x.Profile
+	}
+	return nil
+}
+
+func (x *RelationProfileChangedTips) GetDeleted() bool {
+	if x != nil {
+		return x.Deleted
+	}
+	return false
+}
+
 var File_sdkws_sdkws_proto protoreflect.FileDescriptor
 
 const file_sdkws_sdkws_proto_rawDesc = "" +
@@ -6121,7 +6275,23 @@ const file_sdkws_sdkws_proto_rawDesc = "" +
 	"\x03end\x18\x05 \x01(\bR\x03end\"Z\n" +
 	"\x16ConversationDeleteTips\x12\x16\n" +
 	"\x06userID\x18\x01 \x01(\tR\x06userID\x12(\n" +
-	"\x0fconversationIDs\x18\x02 \x03(\tR\x0fconversationIDs*0\n" +
+	"\x0fconversationIDs\x18\x02 \x03(\tR\x0fconversationIDs\"\xfd\x01\n" +
+	"\x0fRelationProfile\x12 \n" +
+	"\vownerUserID\x18\x01 \x01(\tR\vownerUserID\x12\"\n" +
+	"\ftargetUserID\x18\x02 \x01(\tR\ftargetUserID\x12\x18\n" +
+	"\aspaceID\x18\x03 \x01(\tR\aspaceID\x12\"\n" +
+	"\frelationType\x18\x04 \x01(\tR\frelationType\x12\x16\n" +
+	"\x06remark\x18\x05 \x01(\tR\x06remark\x12\x0e\n" +
+	"\x02ex\x18\x06 \x01(\tR\x02ex\x12\x1e\n" +
+	"\n" +
+	"createTime\x18\a \x01(\x03R\n" +
+	"createTime\x12\x1e\n" +
+	"\n" +
+	"updateTime\x18\b \x01(\x03R\n" +
+	"updateTime\"o\n" +
+	"\x1aRelationProfileChangedTips\x127\n" +
+	"\aprofile\x18\x01 \x01(\v2\x1d.openim.sdkws.RelationProfileR\aprofile\x12\x18\n" +
+	"\adeleted\x18\x02 \x01(\bR\adeleted*0\n" +
 	"\tPullOrder\x12\x10\n" +
 	"\fPullOrderAsc\x10\x00\x12\x11\n" +
 	"\rPullOrderDesc\x10\x01B%Z#github.com/openimsdk/protocol/sdkwsb\x06proto3"
@@ -6139,7 +6309,7 @@ func file_sdkws_sdkws_proto_rawDescGZIP() []byte {
 }
 
 var file_sdkws_sdkws_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_sdkws_sdkws_proto_msgTypes = make([]protoimpl.MessageInfo, 82)
+var file_sdkws_sdkws_proto_msgTypes = make([]protoimpl.MessageInfo, 84)
 var file_sdkws_sdkws_proto_goTypes = []any{
 	(PullOrder)(0),                        // 0: openim.sdkws.PullOrder
 	(*GroupInfo)(nil),                     // 1: openim.sdkws.GroupInfo
@@ -6217,25 +6387,27 @@ var file_sdkws_sdkws_proto_goTypes = []any{
 	(*SubUserOnlineStatus)(nil),           // 73: openim.sdkws.SubUserOnlineStatus
 	(*StreamMsgTips)(nil),                 // 74: openim.sdkws.StreamMsgTips
 	(*ConversationDeleteTips)(nil),        // 75: openim.sdkws.ConversationDeleteTips
-	nil,                                   // 76: openim.sdkws.PullMessageBySeqsResp.MsgsEntry
-	nil,                                   // 77: openim.sdkws.PullMessageBySeqsResp.NotificationMsgsEntry
-	nil,                                   // 78: openim.sdkws.GetMaxSeqResp.MaxSeqsEntry
-	nil,                                   // 79: openim.sdkws.GetMaxSeqResp.MinSeqsEntry
-	nil,                                   // 80: openim.sdkws.MsgData.OptionsEntry
-	nil,                                   // 81: openim.sdkws.PushMessages.MsgsEntry
-	nil,                                   // 82: openim.sdkws.PushMessages.NotificationMsgsEntry
-	(*wrapperspb.StringValue)(nil),        // 83: openim.protobuf.StringValue
-	(*wrapperspb.Int32Value)(nil),         // 84: openim.protobuf.Int32Value
+	(*RelationProfile)(nil),               // 76: openim.sdkws.RelationProfile
+	(*RelationProfileChangedTips)(nil),    // 77: openim.sdkws.RelationProfileChangedTips
+	nil,                                   // 78: openim.sdkws.PullMessageBySeqsResp.MsgsEntry
+	nil,                                   // 79: openim.sdkws.PullMessageBySeqsResp.NotificationMsgsEntry
+	nil,                                   // 80: openim.sdkws.GetMaxSeqResp.MaxSeqsEntry
+	nil,                                   // 81: openim.sdkws.GetMaxSeqResp.MinSeqsEntry
+	nil,                                   // 82: openim.sdkws.MsgData.OptionsEntry
+	nil,                                   // 83: openim.sdkws.PushMessages.MsgsEntry
+	nil,                                   // 84: openim.sdkws.PushMessages.NotificationMsgsEntry
+	(*wrapperspb.StringValue)(nil),        // 85: openim.protobuf.StringValue
+	(*wrapperspb.Int32Value)(nil),         // 86: openim.protobuf.Int32Value
 }
 var file_sdkws_sdkws_proto_depIdxs = []int32{
-	83, // 0: openim.sdkws.GroupInfoForSet.ex:type_name -> openim.protobuf.StringValue
-	84, // 1: openim.sdkws.GroupInfoForSet.needVerification:type_name -> openim.protobuf.Int32Value
-	84, // 2: openim.sdkws.GroupInfoForSet.lookMemberInfo:type_name -> openim.protobuf.Int32Value
-	84, // 3: openim.sdkws.GroupInfoForSet.applyMemberFriend:type_name -> openim.protobuf.Int32Value
-	83, // 4: openim.sdkws.UserInfoWithEx.nickname:type_name -> openim.protobuf.StringValue
-	83, // 5: openim.sdkws.UserInfoWithEx.faceURL:type_name -> openim.protobuf.StringValue
-	83, // 6: openim.sdkws.UserInfoWithEx.ex:type_name -> openim.protobuf.StringValue
-	84, // 7: openim.sdkws.UserInfoWithEx.globalRecvMsgOpt:type_name -> openim.protobuf.Int32Value
+	85, // 0: openim.sdkws.GroupInfoForSet.ex:type_name -> openim.protobuf.StringValue
+	86, // 1: openim.sdkws.GroupInfoForSet.needVerification:type_name -> openim.protobuf.Int32Value
+	86, // 2: openim.sdkws.GroupInfoForSet.lookMemberInfo:type_name -> openim.protobuf.Int32Value
+	86, // 3: openim.sdkws.GroupInfoForSet.applyMemberFriend:type_name -> openim.protobuf.Int32Value
+	85, // 4: openim.sdkws.UserInfoWithEx.nickname:type_name -> openim.protobuf.StringValue
+	85, // 5: openim.sdkws.UserInfoWithEx.faceURL:type_name -> openim.protobuf.StringValue
+	85, // 6: openim.sdkws.UserInfoWithEx.ex:type_name -> openim.protobuf.StringValue
+	86, // 7: openim.sdkws.UserInfoWithEx.globalRecvMsgOpt:type_name -> openim.protobuf.Int32Value
 	5,  // 8: openim.sdkws.FriendInfo.friendUser:type_name -> openim.sdkws.UserInfo
 	4,  // 9: openim.sdkws.BlackInfo.blackUserInfo:type_name -> openim.sdkws.PublicUserInfo
 	4,  // 10: openim.sdkws.GroupRequest.userInfo:type_name -> openim.sdkws.PublicUserInfo
@@ -6243,14 +6415,14 @@ var file_sdkws_sdkws_proto_depIdxs = []int32{
 	12, // 12: openim.sdkws.PullMessageBySeqsReq.seqRanges:type_name -> openim.sdkws.SeqRange
 	0,  // 13: openim.sdkws.PullMessageBySeqsReq.order:type_name -> openim.sdkws.PullOrder
 	18, // 14: openim.sdkws.PullMsgs.Msgs:type_name -> openim.sdkws.MsgData
-	76, // 15: openim.sdkws.PullMessageBySeqsResp.msgs:type_name -> openim.sdkws.PullMessageBySeqsResp.MsgsEntry
-	77, // 16: openim.sdkws.PullMessageBySeqsResp.notificationMsgs:type_name -> openim.sdkws.PullMessageBySeqsResp.NotificationMsgsEntry
-	78, // 17: openim.sdkws.GetMaxSeqResp.maxSeqs:type_name -> openim.sdkws.GetMaxSeqResp.MaxSeqsEntry
-	79, // 18: openim.sdkws.GetMaxSeqResp.minSeqs:type_name -> openim.sdkws.GetMaxSeqResp.MinSeqsEntry
-	80, // 19: openim.sdkws.MsgData.options:type_name -> openim.sdkws.MsgData.OptionsEntry
+	78, // 15: openim.sdkws.PullMessageBySeqsResp.msgs:type_name -> openim.sdkws.PullMessageBySeqsResp.MsgsEntry
+	79, // 16: openim.sdkws.PullMessageBySeqsResp.notificationMsgs:type_name -> openim.sdkws.PullMessageBySeqsResp.NotificationMsgsEntry
+	80, // 17: openim.sdkws.GetMaxSeqResp.maxSeqs:type_name -> openim.sdkws.GetMaxSeqResp.MaxSeqsEntry
+	81, // 18: openim.sdkws.GetMaxSeqResp.minSeqs:type_name -> openim.sdkws.GetMaxSeqResp.MinSeqsEntry
+	82, // 19: openim.sdkws.MsgData.options:type_name -> openim.sdkws.MsgData.OptionsEntry
 	20, // 20: openim.sdkws.MsgData.offlinePushInfo:type_name -> openim.sdkws.OfflinePushInfo
-	81, // 21: openim.sdkws.PushMessages.msgs:type_name -> openim.sdkws.PushMessages.MsgsEntry
-	82, // 22: openim.sdkws.PushMessages.notificationMsgs:type_name -> openim.sdkws.PushMessages.NotificationMsgsEntry
+	83, // 21: openim.sdkws.PushMessages.msgs:type_name -> openim.sdkws.PushMessages.MsgsEntry
+	84, // 22: openim.sdkws.PushMessages.notificationMsgs:type_name -> openim.sdkws.PushMessages.NotificationMsgsEntry
 	1,  // 23: openim.sdkws.GroupCreatedTips.group:type_name -> openim.sdkws.GroupInfo
 	3,  // 24: openim.sdkws.GroupCreatedTips.opUser:type_name -> openim.sdkws.GroupMemberFullInfo
 	3,  // 25: openim.sdkws.GroupCreatedTips.memberList:type_name -> openim.sdkws.GroupMemberFullInfo
@@ -6314,15 +6486,16 @@ var file_sdkws_sdkws_proto_depIdxs = []int32{
 	41, // 83: openim.sdkws.FriendInfoChangedTips.fromToUserID:type_name -> openim.sdkws.FromToUserID
 	41, // 84: openim.sdkws.FriendsInfoUpdateTips.fromToUserID:type_name -> openim.sdkws.FromToUserID
 	71, // 85: openim.sdkws.SubUserOnlineStatusTips.subscribers:type_name -> openim.sdkws.SubUserOnlineStatusElem
-	13, // 86: openim.sdkws.PullMessageBySeqsResp.MsgsEntry.value:type_name -> openim.sdkws.PullMsgs
-	13, // 87: openim.sdkws.PullMessageBySeqsResp.NotificationMsgsEntry.value:type_name -> openim.sdkws.PullMsgs
-	13, // 88: openim.sdkws.PushMessages.MsgsEntry.value:type_name -> openim.sdkws.PullMsgs
-	13, // 89: openim.sdkws.PushMessages.NotificationMsgsEntry.value:type_name -> openim.sdkws.PullMsgs
-	90, // [90:90] is the sub-list for method output_type
-	90, // [90:90] is the sub-list for method input_type
-	90, // [90:90] is the sub-list for extension type_name
-	90, // [90:90] is the sub-list for extension extendee
-	0,  // [0:90] is the sub-list for field type_name
+	76, // 86: openim.sdkws.RelationProfileChangedTips.profile:type_name -> openim.sdkws.RelationProfile
+	13, // 87: openim.sdkws.PullMessageBySeqsResp.MsgsEntry.value:type_name -> openim.sdkws.PullMsgs
+	13, // 88: openim.sdkws.PullMessageBySeqsResp.NotificationMsgsEntry.value:type_name -> openim.sdkws.PullMsgs
+	13, // 89: openim.sdkws.PushMessages.MsgsEntry.value:type_name -> openim.sdkws.PullMsgs
+	13, // 90: openim.sdkws.PushMessages.NotificationMsgsEntry.value:type_name -> openim.sdkws.PullMsgs
+	91, // [91:91] is the sub-list for method output_type
+	91, // [91:91] is the sub-list for method input_type
+	91, // [91:91] is the sub-list for extension type_name
+	91, // [91:91] is the sub-list for extension extendee
+	0,  // [0:91] is the sub-list for field type_name
 }
 
 func init() { file_sdkws_sdkws_proto_init() }
@@ -6336,7 +6509,7 @@ func file_sdkws_sdkws_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_sdkws_sdkws_proto_rawDesc), len(file_sdkws_sdkws_proto_rawDesc)),
 			NumEnums:      1,
-			NumMessages:   82,
+			NumMessages:   84,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

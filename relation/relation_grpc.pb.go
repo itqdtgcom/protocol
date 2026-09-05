@@ -46,6 +46,9 @@ const (
 	Friend_GetFullFriendUserIDs_FullMethodName           = "/openim.relation.friend/getFullFriendUserIDs"
 	Friend_NotificationUserInfoUpdate_FullMethodName     = "/openim.relation.friend/NotificationUserInfoUpdate"
 	Friend_GetFriendInfo_FullMethodName                  = "/openim.relation.friend/getFriendInfo"
+	Friend_GetRelationProfiles_FullMethodName            = "/openim.relation.friend/getRelationProfiles"
+	Friend_UpdateRelationProfile_FullMethodName          = "/openim.relation.friend/updateRelationProfile"
+	Friend_DeleteRelationProfile_FullMethodName          = "/openim.relation.friend/deleteRelationProfile"
 )
 
 // FriendClient is the client API for Friend service.
@@ -103,6 +106,10 @@ type FriendClient interface {
 	GetFullFriendUserIDs(ctx context.Context, in *GetFullFriendUserIDsReq, opts ...grpc.CallOption) (*GetFullFriendUserIDsResp, error)
 	NotificationUserInfoUpdate(ctx context.Context, in *NotificationUserInfoUpdateReq, opts ...grpc.CallOption) (*NotificationUserInfoUpdateResp, error)
 	GetFriendInfo(ctx context.Context, in *GetFriendInfoReq, opts ...grpc.CallOption) (*GetFriendInfoResp, error)
+	// Private profile for a non-friend relation (currently same-space colleagues).
+	GetRelationProfiles(ctx context.Context, in *GetRelationProfilesReq, opts ...grpc.CallOption) (*GetRelationProfilesResp, error)
+	UpdateRelationProfile(ctx context.Context, in *UpdateRelationProfileReq, opts ...grpc.CallOption) (*UpdateRelationProfileResp, error)
+	DeleteRelationProfile(ctx context.Context, in *DeleteRelationProfileReq, opts ...grpc.CallOption) (*DeleteRelationProfileResp, error)
 }
 
 type friendClient struct {
@@ -383,6 +390,36 @@ func (c *friendClient) GetFriendInfo(ctx context.Context, in *GetFriendInfoReq, 
 	return out, nil
 }
 
+func (c *friendClient) GetRelationProfiles(ctx context.Context, in *GetRelationProfilesReq, opts ...grpc.CallOption) (*GetRelationProfilesResp, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetRelationProfilesResp)
+	err := c.cc.Invoke(ctx, Friend_GetRelationProfiles_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *friendClient) UpdateRelationProfile(ctx context.Context, in *UpdateRelationProfileReq, opts ...grpc.CallOption) (*UpdateRelationProfileResp, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UpdateRelationProfileResp)
+	err := c.cc.Invoke(ctx, Friend_UpdateRelationProfile_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *friendClient) DeleteRelationProfile(ctx context.Context, in *DeleteRelationProfileReq, opts ...grpc.CallOption) (*DeleteRelationProfileResp, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DeleteRelationProfileResp)
+	err := c.cc.Invoke(ctx, Friend_DeleteRelationProfile_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // FriendServer is the server API for Friend service.
 // All implementations must embed UnimplementedFriendServer
 // for forward compatibility.
@@ -438,6 +475,10 @@ type FriendServer interface {
 	GetFullFriendUserIDs(context.Context, *GetFullFriendUserIDsReq) (*GetFullFriendUserIDsResp, error)
 	NotificationUserInfoUpdate(context.Context, *NotificationUserInfoUpdateReq) (*NotificationUserInfoUpdateResp, error)
 	GetFriendInfo(context.Context, *GetFriendInfoReq) (*GetFriendInfoResp, error)
+	// Private profile for a non-friend relation (currently same-space colleagues).
+	GetRelationProfiles(context.Context, *GetRelationProfilesReq) (*GetRelationProfilesResp, error)
+	UpdateRelationProfile(context.Context, *UpdateRelationProfileReq) (*UpdateRelationProfileResp, error)
+	DeleteRelationProfile(context.Context, *DeleteRelationProfileReq) (*DeleteRelationProfileResp, error)
 	mustEmbedUnimplementedFriendServer()
 }
 
@@ -528,6 +569,15 @@ func (UnimplementedFriendServer) NotificationUserInfoUpdate(context.Context, *No
 }
 func (UnimplementedFriendServer) GetFriendInfo(context.Context, *GetFriendInfoReq) (*GetFriendInfoResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetFriendInfo not implemented")
+}
+func (UnimplementedFriendServer) GetRelationProfiles(context.Context, *GetRelationProfilesReq) (*GetRelationProfilesResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetRelationProfiles not implemented")
+}
+func (UnimplementedFriendServer) UpdateRelationProfile(context.Context, *UpdateRelationProfileReq) (*UpdateRelationProfileResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateRelationProfile not implemented")
+}
+func (UnimplementedFriendServer) DeleteRelationProfile(context.Context, *DeleteRelationProfileReq) (*DeleteRelationProfileResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteRelationProfile not implemented")
 }
 func (UnimplementedFriendServer) mustEmbedUnimplementedFriendServer() {}
 func (UnimplementedFriendServer) testEmbeddedByValue()                {}
@@ -1036,6 +1086,60 @@ func _Friend_GetFriendInfo_Handler(srv interface{}, ctx context.Context, dec fun
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Friend_GetRelationProfiles_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetRelationProfilesReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FriendServer).GetRelationProfiles(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Friend_GetRelationProfiles_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FriendServer).GetRelationProfiles(ctx, req.(*GetRelationProfilesReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Friend_UpdateRelationProfile_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateRelationProfileReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FriendServer).UpdateRelationProfile(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Friend_UpdateRelationProfile_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FriendServer).UpdateRelationProfile(ctx, req.(*UpdateRelationProfileReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Friend_DeleteRelationProfile_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteRelationProfileReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FriendServer).DeleteRelationProfile(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Friend_DeleteRelationProfile_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FriendServer).DeleteRelationProfile(ctx, req.(*DeleteRelationProfileReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Friend_ServiceDesc is the grpc.ServiceDesc for Friend service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1150,6 +1254,18 @@ var Friend_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "getFriendInfo",
 			Handler:    _Friend_GetFriendInfo_Handler,
+		},
+		{
+			MethodName: "getRelationProfiles",
+			Handler:    _Friend_GetRelationProfiles_Handler,
+		},
+		{
+			MethodName: "updateRelationProfile",
+			Handler:    _Friend_UpdateRelationProfile_Handler,
+		},
+		{
+			MethodName: "deleteRelationProfile",
+			Handler:    _Friend_DeleteRelationProfile_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

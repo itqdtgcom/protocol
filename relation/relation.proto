@@ -290,6 +290,35 @@ message getFriendInfoResp {
   repeated FriendInfoOnly friendInfos = 1;
 }
 
+message getRelationProfilesReq {
+  string ownerUserID = 1;
+  repeated string targetUserIDs = 2;
+  openim.sdkws.RequestPagination pagination = 3;
+}
+
+message getRelationProfilesResp {
+  repeated openim.sdkws.RelationProfile profiles = 1;
+  int32 total = 2;
+}
+
+message updateRelationProfileReq {
+  string ownerUserID = 1;
+  string targetUserID = 2;
+  openim.protobuf.StringValue remark = 3;
+  openim.protobuf.StringValue ex = 4;
+}
+
+message updateRelationProfileResp {
+  openim.sdkws.RelationProfile profile = 1;
+}
+
+message deleteRelationProfileReq {
+  string ownerUserID = 1;
+  string targetUserID = 2;
+}
+
+message deleteRelationProfileResp {}
+
 service friend {
   // Friend request
   rpc applyToAddFriend(applyToAddFriendReq) returns (applyToAddFriendResp);
@@ -345,4 +374,9 @@ service friend {
   rpc NotificationUserInfoUpdate(notificationUserInfoUpdateReq) returns (notificationUserInfoUpdateResp);
 
   rpc getFriendInfo(getFriendInfoReq) returns (getFriendInfoResp);
+
+  // Private profile for a non-friend relation (currently same-space colleagues).
+  rpc getRelationProfiles(getRelationProfilesReq) returns (getRelationProfilesResp);
+  rpc updateRelationProfile(updateRelationProfileReq) returns (updateRelationProfileResp);
+  rpc deleteRelationProfile(deleteRelationProfileReq) returns (deleteRelationProfileResp);
 }
